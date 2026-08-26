@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Geist:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  letter-spacing: 0.18px;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --pupple: #4272f7;
+  --gray: #b8b8b8;
+  --dark-gray: #d4d4d4;
+  --background: #f1f1f1;
+  --background-secudary: #16294b;
+  --text-color: #1f1f1f;
+  --text-color-white: #f1f1f1;
+  --border-color: #dbdbdb;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  /* outline: auto; */
+}
+body{
+  background-color: var(--background);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111827;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 10px;
+  border: 2px solid #111827;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4b5563;
+}

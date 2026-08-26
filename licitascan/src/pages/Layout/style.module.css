@@ -1,0 +1,309 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 100vh;
+}
+.containerMenu{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    /* background-color: #f4f4f4; */
+    border-right: 0.5px solid #1D212B;
+    z-index: 100;
+}
+.logo{
+    width: 150px;
+    height: auto;
+    /* margin-bottom: 20px; */
+}
+
+.menuSide{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background-color: var(--background-secudary);
+}
+.menuSide h1{
+    color: #6B52E7;
+    font-size: 24px;
+    font-family:'Baloo 2', sans-serif;
+    font-weight: bold;
+    margin-bottom: -140px;
+}
+.menuSide a{
+    display: block;
+    text-decoration: none;
+    padding: 10px 8px; 
+    border-radius: 4px;
+    color: var(--text-color-white);
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    /* margin-bottom: 15px; */
+    transition: color 0.25s ease, background-color 0.25s ease;
+    width: 100%;
+}
+
+.menuSide li a:hover{
+    font-weight: 600;
+}
+
+.menuSide li a:hover,
+.menuSide li a.active{
+    color: var(--text-color-white);
+    background-color: var(--pupple);
+    font-weight: 500;
+    width: 100%;
+}
+
+.menuSide a:hover .icon,
+.menuSide a.active .icon{
+    color: var(--text-color-white);
+}
+.menuSide a .icon{
+    transition: color 0.25s ease;
+}
+.linksMenuNote > ul, .linksMenuFolder > ul{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    gap: 10px;
+
+}
+.linksMenu{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    gap: 30px;
+    margin-top: 40px;
+    height: 100%;
+    width: 100%;
+}
+.linksMenuNote{
+    margin-bottom: 30px;
+    width: 100%;
+}
+.linksMenuNote li{
+    width: 100%;
+}
+.linksMenuFolder h2{
+    color: #d4d4d4;
+    font-size: 16px;
+    font-family:'Geist', sans-serif;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.btnLogout > button{
+    background-color: #131923;
+    color: #d4d4d4;
+    padding: 10px 15px;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.btnLogout > button:hover{
+    background-color: #d4d4d4;
+    color: #131923;
+    /* border: 1px solid #131923; */
+}
+
+.headerContent{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 20px;
+    /* margin-bottom: -10px; */
+    /* border-bottom: 0.5px solid var(--border-color);
+     */
+     box-shadow: 0px 0px 1px #00000036;
+    /* border:1px solid var(--border-color); */
+    background-color: var(--card-background);
+}
+.containerContent{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    margin-left: 250px;
+    padding: 20px;
+}
+
+ .headerContent p{
+    color: var(--text-color);
+    font-size: 0.8rem;
+    font-family:'Geist', sans-serif;
+    font-weight: 400;
+
+} 
+.titlePage{
+    font-family: 'Geist', sans-serif;
+    color: var(--text-color);
+    width: 100%;
+    margin-left: 30px;
+}
+.titlePage h1{
+       font-size: 1rem;
+    font-weight: 500; 
+}
+.containerSearch{
+    /* margin-left: 30px; */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.containerIcon{
+    color: var(--text-color);
+}
+.search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.containerIcon{
+   position: absolute;
+  left: 1rem;
+  fill: #bdbecb;
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+  z-index: 1;
+}
+.containerSearch  input{
+    width: 700px;
+    /* padding: 0px 15px ; */
+    border-radius: 0px 5px 5px 0px;
+    font-family: 'Montserrat', sans-serif;
+    padding: 15px;
+    padding-left: 3em;
+    outline: none;
+    border-right:none; 
+    border: 1px solid var(--border-color);
+    background-color: var(--card-background);
+    height: 40px;
+    color: var(--text-color);
+}
+.search > input:hover{
+  box-shadow: 0px 0px 10px rgba(133, 133, 133, 0.61);
+}
+.btnNoteNew{
+    padding: 10px 15px;
+    border: none;
+    background-color: var(--pupple);
+    color: var(--text-color);
+    font-family: 'Geist', sans-serif;
+    font-size: 0.9em;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    
+}
+.btnNoteNew:hover{
+  transform: translateY(-2px);
+  box-shadow: 0px 0px 10px rgba(180, 180, 180, 0.61);
+
+}
+
+.containerProfile{
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    color: var(--text-color);
+    /* background-color: var(--card-background); */
+    /* flex-direction: column; */
+    gap: 10px;
+    margin-bottom: 30px;
+}
+.imgProfile{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--card-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.infoProfile h3{
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+.infoProfile p{
+    font-size: 0.8rem;
+    color: var(--gray);
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+
+/* .btnNote{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    /* width: 100px; */
+    /* height: 30px; */
+    /* transition: all 0.2s ease-in-out; */
+/* } */
+
+/* .btnNote:hover{
+    box-shadow: 5px 5px 0px #4CAF50;
+    background-color: #f4f4f4;
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+}  */
+
+
+
+@media (max-width: 768px) {
+    .headerHome {
+        padding: 15px;
+    }
+
+    .headerHome h1 {
+        font-size: 20px;
+    }
+
+    .btnNote {
+        padding: 8px 16px;
+        font-size: 11px;
+    }
+
+    .sectionNotes {
+        margin: 15px auto 0;
+        padding: 0 0.5rem;
+    }
+
+    .cardsNotes {
+        column-count: 1;
+    }
+}
