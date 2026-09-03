@@ -13,6 +13,15 @@
     /* background-color: #f4f4f4; */
     border-right: 0.5px solid #1D212B;
     z-index: 100;
+    transition: width 0.3s ease;
+}
+
+.containerMenu.closed {
+    width: 80px;
+}
+
+.containerMenu.open {
+    width: 250px;
 }
 .logo{
     width: 150px;
@@ -29,13 +38,6 @@
     height: 100%;
     padding: 20px;
     background-color: var(--background-secudary);
-}
-.menuSide h1{
-    color: #6B52E7;
-    font-size: 24px;
-    font-family:'Baloo 2', sans-serif;
-    font-weight: bold;
-    margin-bottom: -140px;
 }
 .menuSide a{
     display: block;
@@ -62,11 +64,7 @@
     width: 100%;
 }
 
-.menuSide a:hover .icon,
-.menuSide a.active .icon{
-    color: var(--text-color-white);
-}
-.menuSide a .icon{
+.menuSide li a .icon {
     transition: color 0.25s ease;
 }
 .linksMenuNote > ul, .linksMenuFolder > ul{
@@ -90,6 +88,9 @@
 .linksMenuNote{
     margin-bottom: 30px;
     width: 100%;
+}
+.linksMenuNote ul{
+    list-style: none;
 }
 .linksMenuNote li{
     width: 100%;
@@ -143,6 +144,15 @@
     width: 100%;
     margin-left: 250px;
     padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+.contentOpen {
+    margin-left: 250px;
+}
+
+.contentClosed {
+    margin-left: 80px;
 }
 
  .headerContent p{
@@ -156,10 +166,10 @@
     font-family: 'Geist', sans-serif;
     color: var(--text-color);
     width: 100%;
-    margin-left: 30px;
+    margin-left: 10px;
 }
 .titlePage h1{
-       font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 500; 
 }
 .containerSearch{
@@ -256,6 +266,92 @@
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
+}
+
+/* Estilos para menu retrátil */
+.toggleBtn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: var(--text-color-white);
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    z-index: 101;
+}
+
+.toggleBtn:hover {
+    color: var(--pupple);
+}
+
+.containerMenu.closed .menuSide {
+    padding: 10px;
+}
+
+.containerMenu.closed .menuSide a {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+}
+
+.containerMenu.closed .menuSide a span {
+    display: none;
+}
+
+.containerMenu.closed .menuSide a .icon {
+    font-size: 1.2em;
+    margin: 0;
+    color: var(--text-color-white);
+}
+
+.containerMenu.closed .linksMenuNote ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.containerMenu.closed .linksMenuNote li {
+    width: auto !important;
+}
+
+.containerMenu.closed .linksMenuNote li a:hover::after {
+    content: attr(data-label);
+    position: absolute;
+    background-color: #333;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    margin-left: 10px;
+}
+
+.containerMenu.closed .containerProfile {
+    display: none;
+}
+
+.containerMenu.closed .btnLogout {
+    width: 100%;
+}
+
+.containerMenu.closed .btnLogout button {
+    width: 100%;
+    padding: 10px 8px;
+}
+
+.containerMenu.closed .linksMenu {
+    gap: 5px;
+}
+
+.containerMenu.closed .linksMenuNote {
+    margin-bottom: 10px;
 }
 
 

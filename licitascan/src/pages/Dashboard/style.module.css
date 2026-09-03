@@ -1,0 +1,14 @@
+.container{
+    width: 100%;
+    margin-top: 30px;
+}
+.containerDados{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.containerTable{
+    margin-top: 30px;
+}

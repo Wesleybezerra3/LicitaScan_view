@@ -1,11 +1,9 @@
-export async function buscarEditais() {
-  const response = await fetch(
-    "http://localhost:3000/api/pncp/editais"
-  );
+import api from "./api";
 
-  if (!response.ok) {
-    throw new Error("Erro ao buscar editais");
-  }
+export async function buscarEditais(page = 1) {
+  const response = await api.get("/pncp/editais", {
+    params: { page },
+  });
 
-  return response.json();
+  return response.data;
 }

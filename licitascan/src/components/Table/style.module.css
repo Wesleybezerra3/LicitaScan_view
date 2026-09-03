@@ -1,0 +1,157 @@
+.tableContainer {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--white);
+}
+
+.table thead {
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.table th {
+    padding: 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Geist', sans-serif;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #fafafa;
+}
+
+.table td {
+    padding: 16px;
+    font-size: 0.8rem;
+    color: #333;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.cellOrgan {
+    font-weight: 600;
+}
+
+.organName {
+    display: block;
+    color: #222;
+}
+
+.editalLink {
+    color: #4F46E5;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.editalLink:hover {
+    color: #3730A3;
+}
+
+.cellObject {
+    max-width: 250px;
+}
+
+.cellObject span {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.dateBox {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+}
+
+.date {
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 0.875rem;
+}
+
+.daysLeft {
+    font-size: 0.75rem;
+    color: #999;
+}
+
+.status {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status.valido {
+    background-color: #D1FAE5;
+    color: #065F46;
+}
+
+.status.vencido {
+    background-color: #FEE2E2;
+    color: #991B1B;
+}
+
+.status.dispensado {
+    background-color: #E0E7FF;
+    color: #312E81;
+}
+
+.actions {
+    display: flex;
+    gap: 0.8em;
+    justify-content: center;
+}
+
+.actionBtn {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: color 0.2s ease;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paginationContainer {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--white);
+    display: flex;
+    justify-content: center;
+    /* margin-top: 1.5em; */
+    gap: 0.5em;
+}
+.actionBtn:hover {
+    color: #4F46E5;
+}
+
+.emptyMessage {
+    text-align: center;
+    color: #999;
+    padding: 32px 16px !important;
+    font-style: italic;
+}

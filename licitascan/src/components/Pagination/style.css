@@ -1,0 +1,58 @@
+.btn-nav{
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: transparent;
+}
+.btn-nav:disabled{
+    cursor: not-allowed;
+    opacity: .35;
+}
+.previous-btn{
+    color: var(--greenEsmerald);
+}
+.next-btn{
+    color: var(--greenEsmerald);
+}
+.container-pagination{
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+    /* margin: -0px auto 40px auto ; */
+    gap: 20px;
+}
+.list-pages{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+}
+.btn-pages{
+    width: 30px;
+    height: 30px;
+    border-radius:50% ;
+    border:1px solid var(--greenEsmerald);
+    font-family: 'Geist';
+    font-weight: 600;
+    color: var(--blackSoft);
+    cursor: pointer;
+}
+.btn-pages:hover,
+.btn-pages:focus-visible,
+.btn-pages.active{
+    background-color: var(--greenEsmerald);
+    color: var(--yellow);
+}
+.page-ellipsis{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--blackSoft);
+    font-weight: 600;
+}

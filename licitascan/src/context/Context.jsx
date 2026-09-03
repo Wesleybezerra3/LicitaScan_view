@@ -8,20 +8,14 @@ export const AppProvider = ({ children }) => {
     nome: "",
   });
    const [activeRoute, setActiveRoute] = useState("dashboard");
-   const [openNote, setOpenNote] = useState(null);
-   const [openNoteData, setOpenNoteData] = useState({});
-
-  useEffect(() => {
-    console.log("openNote:", openNote);
-    console.log("openNoteData:", openNoteData);
-  },[openNote, openNoteData])
+   const [page, setPages] = useState(1);
 
   // useEffect(()=>{
 
   // },[onUpdate])
   const logUser = (userData) => setUser(userData);
   return (
-    <UserContext.Provider value={{ user, logUser, activeRoute, setActiveRoute, openNote, setOpenNote, openNoteData, setOpenNoteData }}>
+    <UserContext.Provider value={{ user, logUser, activeRoute, setActiveRoute, page, setPages }}>
         {children}
     </UserContext.Provider>
   );

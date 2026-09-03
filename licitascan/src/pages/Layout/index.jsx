@@ -5,7 +5,9 @@ import {
   faArchive,
   faFolder,
   faPager,
-  faNewspaper
+  faNewspaper,
+  faBars,
+  faTimes
 } from "@fortawesome/free-solid-svg-icons";
 import { UserContext } from "../../context/Context";
 
@@ -18,6 +20,7 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 
 const Layout = () => {
   const { activeRoute, setActiveRoute } = useContext(UserContext);
+  const [isMenuOpen, setIsMenuOpen] = useState(true);
 
   const location = useLocation();
 
@@ -36,7 +39,10 @@ const Layout = () => {
     <>
 
       <main className={style.container}>
-        <div className={style.containerMenu}>
+        <div className={`${style.containerMenu} ${isMenuOpen ? style.open : style.closed}`}>
+          <button className={style.toggleBtn} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
+          </button>
           <aside className={style.menuSide}>
             <div>
               {/* <img src={logo} alt="Lite Notes" className={style.logo} /> */}
@@ -52,8 +58,8 @@ const Layout = () => {
                       }
                       onClick={() => setActiveRoute("dashboard")}
                     >
-                      <FontAwesomeIcon icon={faHome} className={style.icon} />{" "}
-                      Dashboard
+                      <FontAwesomeIcon icon={faHome} className={style.icon} />
+                      <span>Dashboard</span>
                     </Link>
                     
                   </li>
@@ -66,8 +72,8 @@ const Layout = () => {
                       }
                       onClick={() => setActiveRoute("editais")}
                     >
-                      <FontAwesomeIcon icon={faNewspaper} className={style.icon} />{" "}
-                      Editais
+                      <FontAwesomeIcon icon={faNewspaper} className={style.icon} />
+                      <span>Editais</span>
                     </Link>
                     
                   </li>
@@ -96,11 +102,11 @@ const Layout = () => {
           </aside>
         </div>
 
-        <div className={style.containerContent}>
-          <div className={style.headerContent}>
-            {/* <p>👋 Bem-vindo, {user.nome.split(" ")[0]}!</p> */}
+        <div className={`${style.containerContent} ${isMenuOpen ? style.contentOpen : style.contentClosed}`}>
+          {/* <div className={style.headerContent}>
+            <p>👋 Bem-vindo, {user.nome.split(" ")[0]}!</p>
             <p>👋 Bem-vindo!</p>
-          </div>
+          </div> */}
           <div className={style.titlePage}>
             <h1>
               {activeRoute === "dashboard"
