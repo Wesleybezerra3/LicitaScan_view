@@ -6,6 +6,7 @@ import style from './style.module.css';
 import Table from "../../components/Table";
 import { UserContext } from "../../context/Context";
 import { useContext } from "react";
+import FiltersSection from "../../components/FiltersSection";
 
 const Dashboard = () => {
   // const [data, setdata]= useState();
@@ -89,6 +90,10 @@ const Dashboard = () => {
             color1="#3B82F6"
             color2="#1D4ED8"
           />
+        </section>
+        <section>
+
+          <FiltersSection todas={data?.total} />
         </section>
         <section className={style.containerTable}>
 

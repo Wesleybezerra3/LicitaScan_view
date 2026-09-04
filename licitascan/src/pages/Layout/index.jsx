@@ -77,9 +77,6 @@ const Layout = () => {
                     </Link>
                     
                   </li>
-
-                  
-                 
                 </ul>
               </div>
 

@@ -1,14 +1,18 @@
 .tableContainer {
     width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    flex: 1;
+    min-height: 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.021);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
 }
 
 .table {
     width: 100%;
     border-collapse: collapse;
-    background-color: var(--white);
 }
 
 .table thead {
@@ -21,7 +25,7 @@
     text-align: left;
     font-weight: 600;
     font-size: 0.8rem;
-    color: #666;
+    color: var(--gray);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-family: 'Geist', sans-serif;
@@ -39,7 +43,7 @@
 .table td {
     padding: 16px;
     font-size: 0.8rem;
-    color: #333;
+    color: var(--text-color);
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -52,27 +56,29 @@
     color: #222;
 }
 
-.editalLink {
-    color: #4F46E5;
-    font-weight: 600;
-    cursor: pointer;
-    transition: color 0.2s ease;
+.numeroEdital {
+    /* color: var(--gray); */
+    font-weight: 400;
+    /* cursor: pointer;
+    transition: color 0.2s ease; */
 }
 
-.editalLink:hover {
+/* .editalLink:hover {
     color: #3730A3;
-}
+} */
 
 .cellObject {
-    max-width: 250px;
+    max-width: 350px;
 }
 
 .cellObject span {
-    display: block;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: #666;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    color: var(--text-color);
     font-size: 0.8rem;
 }
 
@@ -102,19 +108,19 @@
     text-transform: capitalize;
 }
 
-.status.valido {
+.status.alta {
     background-color: #D1FAE5;
     color: #065F46;
 }
 
-.status.vencido {
-    background-color: #FEE2E2;
-    color: #991B1B;
+.status.media {
+    background-color: #FEF3C7;
+    color: #92400E;
 }
 
-.status.dispensado {
-    background-color: #E0E7FF;
-    color: #312E81;
+.status.baixa {
+    background-color: #F3F4F6;
+    color: #4B5563;
 }
 
 .actions {
@@ -138,6 +144,7 @@
 
 .paginationContainer {
     width: 100%;
+    margin-top: auto;
     padding: 12px;
     background-color: var(--white);
     display: flex;
@@ -145,6 +152,17 @@
     /* margin-top: 1.5em; */
     gap: 0.5em;
 }
+
+.remainingMessage {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray);
+    font-size: 0.8rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
 .actionBtn:hover {
     color: #4F46E5;
 }

@@ -4,6 +4,8 @@ import { faLink, faStar, faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import Pagination from "../Pagination";
 
 const Table = ({ data = [], page, limit, total}) => {
+  const pageLimit = limit || 10;
+
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
     const date = new Date(dateString);
@@ -19,6 +21,18 @@ const Table = ({ data = [], page, limit, total}) => {
     }
     console.log(url);
   };
+
+
+  const relevancia =(score)=>{
+
+    if(score >= 80){
+      return "Alta"
+    }
+    if(score >= 50 && score < 80){
+      return "Media"
+    }
+    return "Baixa"
+  }
   return (
     <div className={style.tableContainer}>
       <table className={style.table}>
@@ -29,7 +43,7 @@ const Table = ({ data = [], page, limit, total}) => {
             <th>Modalidade</th>
             <th>Objeto</th>
             <th>Prazo de Propostas</th>
-            <th>Situação</th>
+            <th>Relevância</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -47,7 +61,7 @@ const Table = ({ data = [], page, limit, total}) => {
                     </span>
                   </td>
                   <td>
-                    <span className={style.editalLink}>
+                    <span className={style.numeroEdital} title={item?.contratacao?.numero}>
                       {item?.contratacao?.numero || "N/A"}
                     </span>
                   </td>
@@ -65,13 +79,13 @@ const Table = ({ data = [], page, limit, total}) => {
                   </td>
                   <td>
                     <span
-                      className={`${style.status} ${style[item?.contratacao?.situacao?.toLowerCase()]}`}
+                      className={`${style.status} ${style[relevancia(item?.analise?.porcentagemRelevancia)?.toLowerCase()]}`}
                     >
-                      {item?.contratacao?.situacao || "N/A"}
+                      {` ${item?.analise?.porcentagemRelevancia || "N/A"}%`}
                     </span>
                   </td>
                   <td className={style.actions}>
-                    <button
+                    {/* <button
                       className={style.actionBtn}
                       title="Abrir link"
                       onClick={() => openLink(item?.contratacao?.url || "N/A")}
@@ -80,7 +94,7 @@ const Table = ({ data = [], page, limit, total}) => {
                     </button>
                     <button className={style.actionBtn} title="Favoritar">
                       <FontAwesomeIcon icon={faStar} />
-                    </button>
+                    </button> */}
                     <button className={style.actionBtn} title="Mais opções">
                       <FontAwesomeIcon icon={faEllipsisH} />
                     </button>
@@ -98,6 +112,9 @@ const Table = ({ data = [], page, limit, total}) => {
           )}
         </tbody>
       </table>
+      {data.length < pageLimit && (
+        <div className={style.remainingMessage}>Sem mais editais por aqui</div>
+      )}
       <div className={style.paginationContainer}>
         <Pagination page={page} limit={limit} total={total} />
       </div>
