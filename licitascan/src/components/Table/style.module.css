@@ -124,6 +124,7 @@
 }
 
 .actions {
+    position: relative;
     display: flex;
     gap: 0.8em;
     justify-content: center;

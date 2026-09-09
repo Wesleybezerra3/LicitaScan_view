@@ -1,9 +1,13 @@
 import style from "./style.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink, faStar, faEllipsisH } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 import Pagination from "../Pagination";
+import MenuActionsTable from "../menuActionsTable";
 
 const Table = ({ data = [], page, limit, total}) => {
+
+  const [activeMenu, setActiveMenu] = useState(null);
   const pageLimit = limit || 10;
 
   const formatDate = (dateString) => {
@@ -15,12 +19,7 @@ const Table = ({ data = [], page, limit, total}) => {
     return `${day}/${month}/${year}`;
   };
 
-  const openLink = (url) => {
-    if (url) {
-      window.open(url, "_blank");
-    }
-    console.log(url);
-  };
+
 
 
   const relevancia =(score)=>{
@@ -38,6 +37,7 @@ const Table = ({ data = [], page, limit, total}) => {
       <table className={style.table}>
         <thead>
           <tr>
+            <th>UF</th>
             <th>Órgão / Entidade</th>
             <th>Edital</th>
             <th>Modalidade</th>
@@ -55,6 +55,11 @@ const Table = ({ data = [], page, limit, total}) => {
                 : {};
               return (
                 <tr key={index}>
+                    <td className={style.cellUf}>
+                    <span className={style.organUf}>
+                      {unidade.ufSigla || "N/A"}
+                    </span>
+                  </td>
                   <td className={style.cellOrgan}>
                     <span className={style.organName}>
                       {unidade.nomeUnidade || "N/A"}
@@ -85,17 +90,13 @@ const Table = ({ data = [], page, limit, total}) => {
                     </span>
                   </td>
                   <td className={style.actions}>
-                    {/* <button
+                    <MenuActionsTable showMenu={activeMenu === index} url={item?.contratacao?.url} />
+            
+                    <button
                       className={style.actionBtn}
-                      title="Abrir link"
-                      onClick={() => openLink(item?.contratacao?.url || "N/A")}
+                      title="Mais opções"
+                      onClick={() => setActiveMenu(activeMenu === index ? null : index)}
                     >
-                      <FontAwesomeIcon icon={faLink} />
-                    </button>
-                    <button className={style.actionBtn} title="Favoritar">
-                      <FontAwesomeIcon icon={faStar} />
-                    </button> */}
-                    <button className={style.actionBtn} title="Mais opções">
                       <FontAwesomeIcon icon={faEllipsisH} />
                     </button>
                   </td>

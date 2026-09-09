@@ -1,0 +1,59 @@
+.menuContainer {
+    position: absolute;
+    top: -30px;
+    right: 55px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: max-content;
+    padding: 6px;
+    border: 1px solid #e5e7eb;
+    /* width: 100px; */
+    border-radius: 15px 15px 0px 15px;
+    background-color: var(--white);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+    transform-origin: right bottom;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+}
+
+.menuOpen {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.menuClosed {
+    opacity: 0;
+    transform: translateY(6px) scale(0.95);
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.menuContainer button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    border-radius: 50px;
+    background-color: transparent;
+    color: #64748b;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.menuContainer button:hover,
+.menuContainer button:focus-visible {
+    background-color: #eef2ff;
+    color: #4f46e5;
+    outline: none;
+}
+
+.menuContainer button:active {
+    background-color: #e0e7ff;
+}

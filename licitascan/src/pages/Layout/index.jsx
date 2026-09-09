@@ -20,7 +20,7 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 
 const Layout = () => {
   const { activeRoute, setActiveRoute } = useContext(UserContext);
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const location = useLocation();
 
