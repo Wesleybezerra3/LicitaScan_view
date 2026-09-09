@@ -1,3 +1,3 @@
 # LicitaScan
 
-![Demostração do dashboard]("./images/Demostração.png")
+![Demostração do dashboard]("../images/Demostração.png")
