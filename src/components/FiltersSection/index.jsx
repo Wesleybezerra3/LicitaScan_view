@@ -1,8 +1,23 @@
 import { useState } from "react";
+import { UserContext } from "../../context/Context";
+import { useContext } from "react";
 import style from "./style.module.css";
 
 const FiltersSection = ({ todas, novas, favoritas, vencendo }) => {
+
+  
   const [tabState, setTabState] = useState("todas");
+  const { setPageFilter } = useContext(UserContext);
+
+
+
+  const handleTab = (tab) => {
+    // setPageFilter({});
+    if (tab) {
+      setPageFilter(tab);
+      setTabState(tab);
+    }
+  };
 
   return (
     <div className={style.filtersContainer}>
@@ -18,7 +33,7 @@ const FiltersSection = ({ todas, novas, favoritas, vencendo }) => {
             id="todas"
             name="todas"
             className={style.filterButton}
-            onClick={() => setTabState("todas")}
+            onClick={() => handleTab("todas")}
             value={`Todas (${todas || 0})`}
           />
         </div>
@@ -60,7 +75,7 @@ const FiltersSection = ({ todas, novas, favoritas, vencendo }) => {
             id="vencendo"
             name="vencendo"
             className={style.filterButton}
-            onClick={() => setTabState("vencendo")}
+            onClick={() => handleTab("vencendo")}
             value={`Vencendo (${vencendo || 0})`}
           />
         </div>

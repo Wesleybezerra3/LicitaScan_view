@@ -1,21 +1,53 @@
 import { buscarEditais } from "../../service/editais";
+import { buscarEditaisVencendo } from "../../service/editaisVencendo";
 import { useQuery } from "@tanstack/react-query";
 import CardDashboard from "../../components/CardDashboard";
-import { faFile, faCalendar, faClock, faStar } from "@fortawesome/free-solid-svg-icons";
-import style from './style.module.css';
+import {
+  faFile,
+  faCalendar,
+  faClock,
+  faStar,
+} from "@fortawesome/free-solid-svg-icons";
+import style from "./style.module.css";
 import Table from "../../components/Table";
 import { UserContext } from "../../context/Context";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import FiltersSection from "../../components/FiltersSection";
+import { totalEditais } from "../../service/totalEditais";
 
 const Dashboard = () => {
   // const [data, setdata]= useState();
-  const { page } = useContext(UserContext);
+  const { page, pageFilter, orderState } = useContext(UserContext);
+
+  const { data: contadores } = useQuery({
+    queryKey: ["editais", "contadores"],
+    queryFn: totalEditais,
+  });
 
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["editais", page],
-    queryFn: () => buscarEditais(page),
+    queryKey: [
+      "editais",
+      page,
+      pageFilter,
+      orderState.dataEncerramento,
+      orderState.relevancia,
+    ],
+    queryFn: () => {
+      switch (pageFilter) {
+        case "vencendo":
+          return buscarEditaisVencendo(
+            page,
+            orderState.dataEncerramento,
+            orderState.relevancia,
+          );
+
+        default:
+          return buscarEditais(page, orderState);
+      }
+    },
   });
+
+  // console.log('contador:', contadores.totais);
 
   if (isLoading) {
     return <p>Carregando...</p>;
@@ -26,11 +58,11 @@ const Dashboard = () => {
     return <p>Nenhum edital encontrado!</p>;
   }
 
-  if(error){
+  if (error) {
     console.error("Erro ao buscar editais:", error);
     return <p>Erro ao buscar editais: {error.message}</p>;
   }
-   console.log(data)
+  console.log(data);
   // useEffect(() => {
   //   const getEditais = async () => {
   //     try {
@@ -61,7 +93,7 @@ const Dashboard = () => {
           <CardDashboard
             icon={faFile}
             text={"Oportunidades"}
-            dados={data?.total || "0"}
+            dados={contadores.totais?.totalGeral || 0}
             subText={"Encontradas"}
             color1="#6366F1"
             color2="#4F46E5"
@@ -76,9 +108,9 @@ const Dashboard = () => {
           />
           <CardDashboard
             icon={faClock}
-            text={"Vencidos"}
-            dados={"44"}
-            subText={"Prazo encerrado"}
+            text={"Vencendo"}
+            dados={contadores.totais?.totalVencendo || 0}
+            subText={"Prazo se encerrando"}
             color1="#F59E0B"
             color2="#D97706"
           />
@@ -91,19 +123,20 @@ const Dashboard = () => {
             color2="#1D4ED8"
           />
         </section>
-        <section>
-
-          <FiltersSection todas={data?.total} />
-        </section>
         <section className={style.containerTable}>
-
-        <Table
-          data={data?.editais ?? []}
-          page={data?.page}
-          limit={data?.limit}
-          total={data?.total}
-        />
-
+          <FiltersSection
+            todas={contadores.totais?.totalGeral || 0}
+            vencendo={contadores.totais?.totalVencendo || 0}
+          />
+          <div className={style.sectionTitle}>
+            <p>Contratações</p>
+          </div>
+          <Table
+            data={data?.editais ?? []}
+            page={data?.page}
+            limit={data?.limit}
+            total={data?.total}
+          />
         </section>
 
         {/* <div>

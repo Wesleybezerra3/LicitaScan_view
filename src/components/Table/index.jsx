@@ -1,12 +1,12 @@
 import style from "./style.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLink, faStar, faEllipsisH } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import Pagination from "../Pagination";
 import MenuActionsTable from "../menuActionsTable";
+import ButtonOrder from "../ButtonOrder";
 
-const Table = ({ data = [], page, limit, total}) => {
-
+const Table = ({ data = [], page, limit, total }) => {
   const [activeMenu, setActiveMenu] = useState(null);
   const pageLimit = limit || 10;
 
@@ -19,19 +19,6 @@ const Table = ({ data = [], page, limit, total}) => {
     return `${day}/${month}/${year}`;
   };
 
-
-
-
-  const relevancia =(score)=>{
-
-    if(score >= 80){
-      return "Alta"
-    }
-    if(score >= 50 && score < 80){
-      return "Media"
-    }
-    return "Baixa"
-  }
   return (
     <div className={style.tableContainer}>
       <table className={style.table}>
@@ -42,8 +29,19 @@ const Table = ({ data = [], page, limit, total}) => {
             <th>Edital</th>
             <th>Modalidade</th>
             <th>Objeto</th>
-            <th>Prazo de Propostas</th>
-            <th>Relevância</th>
+            <th>Data de publicação</th>
+            <th>
+              Termino de Propostas{" "}
+              <div>
+                <ButtonOrder field="dataEncerramento" />
+              </div>
+            </th>
+            <th>
+              Relevância{" "}
+              <div>
+                <ButtonOrder field="relevancia" />
+              </div>
+            </th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -53,55 +51,76 @@ const Table = ({ data = [], page, limit, total}) => {
               const unidade = item?.contratacao?.unidadeOrgao
                 ? JSON.parse(item?.contratacao?.unidadeOrgao)
                 : {};
+              const entidade = item?.contratacao?.orgaoEntidade
+                ? JSON.parse(item?.contratacao?.orgaoEntidade)
+                : {};
               return (
                 <tr key={index}>
-                    <td className={style.cellUf}>
+                  <td className={style.cellUf}>
                     <span className={style.organUf}>
                       {unidade.ufSigla || "N/A"}
                     </span>
                   </td>
                   <td className={style.cellOrgan}>
                     <span className={style.organName}>
-                      {unidade.nomeUnidade || "N/A"}
+                      {entidade.razaoSocial || unidade.nomeUnidade || "N/A"}
                     </span>
                   </td>
                   <td>
-                    <span className={style.numeroEdital} title={item?.contratacao?.numero}>
+                    <span
+                      className={style.numeroEdital}
+                      title={item?.contratacao?.numero}
+                    >
                       {item?.contratacao?.numero || "N/A"}
                     </span>
                   </td>
-                  <td>{item?.contratacao?.modalidade || 'Pregão eletrônico'}</td>
+                  <td>
+                    {item?.contratacao?.modalidade || "Pregão eletrônico"}
+                  </td>
                   <td className={style.cellObject}>
-                    <span title={item?.contratacao?.objeto}>{item?.contratacao?.objeto || "N/A"}</span>
+                    <span title={item?.contratacao?.objeto}>
+                      {item?.contratacao?.objeto || "N/A"}
+                    </span>
                   </td>
                   <td>
                     <div className={style.dateBox}>
                       <span className={style.date}>
-                        {formatDate(item?.contratacao?.dataEncerramento) || "N/A"}
+                        {formatDate(item?.contratacao?.dataPublicacao) || "N/A"}
                       </span>
-                      {/* <span className={style.daysLeft}>{item?.contratacao?.diasRestantes}</span> */}
+                    </div>
+                  </td>
+                  <td>
+                    <div className={style.dateBox}>
+                      <span className={style.date}>
+                        {formatDate(item?.contratacao?.dataEncerramento) ||
+                          "N/A"}
+                      </span>
                     </div>
                   </td>
                   <td>
                     <span
-                      className={`${style.status} ${style[relevancia(item?.analise?.porcentagemRelevancia)?.toLowerCase()]}`}
+                      className={`${style.status} ${style[item?.analise?.relevancia?.toLowerCase()]}`}
                     >
-                      {` ${item?.analise?.porcentagemRelevancia || "N/A"}%`}
+                      {` ${item?.analise?.relevancia || "N/A"}`}
                     </span>
                   </td>
                   <td className={style.actions}>
-                    <MenuActionsTable showMenu={activeMenu === index} url={item?.contratacao?.url} />
-            
+                    <MenuActionsTable
+                      showMenu={activeMenu === index}
+                      url={item?.contratacao?.url}
+                    />
+
                     <button
                       className={style.actionBtn}
                       title="Mais opções"
-                      onClick={() => setActiveMenu(activeMenu === index ? null : index)}
+                      onClick={() =>
+                        setActiveMenu(activeMenu === index ? null : index)
+                      }
                     >
                       <FontAwesomeIcon icon={faEllipsisH} />
                     </button>
                   </td>
                 </tr>
-                
               );
             })
           ) : (

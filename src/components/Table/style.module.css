@@ -2,12 +2,15 @@
     width: 100%;
     flex: 1;
     min-height: 0;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.021);
+    border-top: 1px solid var(--border-color);
+    /* border-radius: 8px; */
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); */
+    /* border: 1px solid var(--border-color); */
     overflow: hidden;
     display: flex;
+    /* margin-top: -35px; */
     flex-direction: column;
-    background-color: var(--white);
+    /* background-color: var(--white); */
 }
 
 .table {
@@ -21,7 +24,7 @@
 }
 
 .table th {
-    padding: 16px;
+    padding: 20px;
     text-align: left;
     font-weight: 600;
     font-size: 0.8rem;
@@ -48,12 +51,14 @@
 }
 
 .cellOrgan {
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .organName {
     display: block;
-    color: #222;
+    /* color: var(--text-color); */
+    width: 200px;
+    overflow-wrap: break-word;
 }
 
 .numeroEdital {
