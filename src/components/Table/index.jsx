@@ -1,14 +1,16 @@
 import style from "./style.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisH, faLink } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import Pagination from "../Pagination";
 import MenuActionsTable from "../menuActionsTable";
 import ButtonOrder from "../ButtonOrder";
 
-const Table = ({ data = [], page, limit, total }) => {
+const Table = ({ data = [], page, limit, total, isLoading }) => {
   const [activeMenu, setActiveMenu] = useState(null);
   const pageLimit = limit || 10;
+
+  const loadingRows = Array.from({ length: 4 });
 
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
@@ -17,6 +19,13 @@ const Table = ({ data = [], page, limit, total }) => {
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
+  };
+
+  const openLink = (url) => {
+    if (url) {
+      window.open(url, "_blank");
+    }
+    console.log(url);
   };
 
   return (
@@ -30,13 +39,13 @@ const Table = ({ data = [], page, limit, total }) => {
             <th>Modalidade</th>
             <th>Objeto</th>
             <th>Data de publicação</th>
-            <th>
+            <th className={style.order}>
               Termino de Propostas{" "}
               <div>
                 <ButtonOrder field="dataEncerramento" />
               </div>
             </th>
-            <th>
+            <th className={style.order}>
               Relevância{" "}
               <div>
                 <ButtonOrder field="relevancia" />
@@ -46,7 +55,17 @@ const Table = ({ data = [], page, limit, total }) => {
           </tr>
         </thead>
         <tbody>
-          {data.length > 0 ? (
+          {isLoading ? (
+            loadingRows.map((_, index) => (
+              <tr key={`loading-${index}`} className={style.loadingRow}>
+                {Array.from({ length: 9 }).map((__, cellIndex) => (
+                  <td key={`loading-cell-${cellIndex}`}>
+                    <span className={style.loadingPlaceholder} />
+                  </td>
+                ))}
+              </tr>
+            ))
+          ) : data.length > 0 ? (
             data.map((item, index) => {
               const unidade = item?.contratacao?.unidadeOrgao
                 ? JSON.parse(item?.contratacao?.unidadeOrgao)
@@ -62,7 +81,10 @@ const Table = ({ data = [], page, limit, total }) => {
                     </span>
                   </td>
                   <td className={style.cellOrgan}>
-                    <span className={style.organName}>
+                    <span
+                      className={style.organName}
+                      title={entidade.razaoSocial || unidade.nomeUnidade}
+                    >
                       {entidade.razaoSocial || unidade.nomeUnidade || "N/A"}
                     </span>
                   </td>
@@ -78,20 +100,18 @@ const Table = ({ data = [], page, limit, total }) => {
                     {item?.contratacao?.modalidade || "Pregão eletrônico"}
                   </td>
                   <td className={style.cellObject}>
-                    <span title={item?.contratacao?.objeto}>
-                      {item?.contratacao?.objeto || "N/A"}
-                    </span>
+                    <span title={item?.contratacao?.objeto || 'N/A'}>{item?.contratacao?.objeto || "N/A"}</span>
                   </td>
                   <td>
                     <div className={style.dateBox}>
-                      <span className={style.date}>
+                      <span className={style.datePubli}>
                         {formatDate(item?.contratacao?.dataPublicacao) || "N/A"}
                       </span>
                     </div>
                   </td>
                   <td>
                     <div className={style.dateBox}>
-                      <span className={style.date}>
+                      <span className={style.dateProposta}>
                         {formatDate(item?.contratacao?.dataEncerramento) ||
                           "N/A"}
                       </span>
@@ -109,7 +129,9 @@ const Table = ({ data = [], page, limit, total }) => {
                       showMenu={activeMenu === index}
                       url={item?.contratacao?.url}
                     />
-
+                    <button onClick={() => openLink(item?.contratacao?.url)} className={style.linkBtn}>
+                      <FontAwesomeIcon icon={faLink} />
+                    </button>
                     <button
                       className={style.actionBtn}
                       title="Mais opções"
@@ -125,7 +147,7 @@ const Table = ({ data = [], page, limit, total }) => {
             })
           ) : (
             <tr>
-              <td colSpan="7" className={style.emptyMessage}>
+              <td colSpan="9" className={style.emptyMessage}>
                 Nenhum edital encontrado
               </td>
             </tr>
@@ -133,7 +155,12 @@ const Table = ({ data = [], page, limit, total }) => {
         </tbody>
       </table>
       {data.length < pageLimit && (
-        <div className={style.remainingMessage}>Sem mais editais por aqui</div>
+        <div
+          className={style.remainingMessage}
+          style={{ display: isLoading ? "none" : "block" }}
+        >
+          Sem mais editais por aqui
+        </div>
       )}
       <div className={style.paginationContainer}>
         <Pagination page={page} limit={limit} total={total} />

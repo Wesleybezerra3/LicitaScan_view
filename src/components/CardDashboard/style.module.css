@@ -1,15 +1,15 @@
 
 .cardDashboard {
     background-color: var(--white);
-    padding: 24px;
+    padding: 15px;
     border-radius: 12px;
     height: 120px;
     width: 100%;
-    max-width: 300px;
+    max-width: 280px;
     display: flex;
     gap: 1em;
     align-items: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); */
     transition: all 0.3s ease;
     border: 1px solid var(--border-color);
 }
@@ -21,9 +21,9 @@
 
 .containerImg {
     background-color: transparent;
-    width: 64px;
-    height: 64px;
-    min-width: 64px;
+    width: 54px;
+    height: 54px;
+    min-width: 54px;
     border-radius: 14px;
     display: flex;
     align-items: center;
@@ -39,7 +39,7 @@
 
 .icon {
     color:var(--card-color-1, #6366F1);
-    font-size: 1.5em;
+    font-size: 1.3em;
 }
 
 .content {
@@ -58,14 +58,14 @@
     font-size: 0.75rem;
     color: #999;
     font-weight: 600;
-    text-transform: uppercase;
+    text-transform: capitalize;
     letter-spacing: 0.5px;
 }
 
 .content p:nth-child(2) {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--text-color);
     line-height: 1;
 }
 
@@ -73,4 +73,49 @@
     font-size: 0.8rem;
     color: #b0b0b0;
     line-height: 1.2;
+}
+
+.cardDashboard.loading:hover {
+    transform: none;
+}
+
+.skeletonIcon,
+.skeletonLine {
+    display: block;
+    background: linear-gradient(90deg, #eeeeee 25%, #f8f8f8 50%, #eeeeee 75%);
+    background-size: 200% 100%;
+    animation: cardLoadingPulse 1.4s ease-in-out infinite;
+}
+
+.skeletonIcon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+}
+
+.skeletonLine {
+    height: 12px;
+    border-radius: 4px;
+}
+
+.skeletonLabel {
+    width: 72%;
+}
+
+.skeletonValue {
+    width: 42%;
+    height: 20px;
+}
+
+.skeletonSubtext {
+    width: 58%;
+}
+
+@keyframes cardLoadingPulse {
+    from {
+        background-position: 200% 0;
+    }
+    to {
+        background-position: -200% 0;
+    }
 }

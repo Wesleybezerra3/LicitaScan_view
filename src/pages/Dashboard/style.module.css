@@ -1,4 +1,4 @@
-.container{
+ .container{
     width: 100%;
     flex: 1;
     min-height: 0;
@@ -9,8 +9,19 @@
 .containerDados{
     width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: stretch;
+    gap: 1em;
+}
+.containerCards{
+    display: flex;
+    gap: 1em;
+    flex: 1;
+    /* flex-wrap: wrap; */
+}
+
+.containerDados, .containerResumo {
+    width: 100%;
+    margin-top: 1.5em;
 }
 
 .containerTable{
@@ -24,8 +35,83 @@
     display: flex; */
 }
 .sectionTitle{
-    font-family: 'Geist', sans-serif;
-    padding: 16px;
-    font-weight: 500;
+    display: flex;
+    align-items: center;
+    min-height: 58px;
+    padding: 14px 20px;
+    /* border-top: 0.5px solid var(--border-color); */
+    /* border-bottom: 0.5px solid var(--border-color); */
+    background-color: #fcfcfd;
     color: var(--text-color);
+    font-family: 'Geist', sans-serif;
+}
+
+.sectionTitle p {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 650;
+    line-height: 1.4;
+}
+
+.pageFilter{
+    display: inline-flex;
+    align-items: center;
+    min-height: 25px;
+    padding: 3px 10px;
+    border: 1px solid #c7d2fe;
+    border-radius: 999px;
+    background-color: #eef2ff;
+    color: var(--pupple);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    text-transform: capitalize;
+}
+
+.pageFilter.todas {
+    border-color: #c7d2fe;
+    background-color: #eef2ff;
+    color: #4338ca;
+}
+
+.pageFilter.novas {
+    border-color: #a7f3d0;
+    background-color: #ecfdf5;
+    color: #047857;
+}
+
+.pageFilter.vencendo {
+    border-color: #fcd34d;
+    background-color: #fffbeb;
+    color: #b45309;
+}
+
+.pageFilter.favoritas {
+    border-color: #bfdbfe;
+    background-color: #eff6ff;
+    color: #1d4ed8;
+}
+
+@media (max-width: 640px) {
+    .containerDados {
+        flex-direction: column;
+    }
+
+    .containerCards {
+        flex-direction: column;
+    }
+
+    .sectionTitle {
+        min-height: 52px;
+        padding: 12px 14px;
+    }
+
+    .sectionTitle p {
+        font-size: 0.85rem;
+    }
 }

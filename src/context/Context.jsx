@@ -11,13 +11,16 @@ export const AppProvider = ({ children }) => {
   const [page, setPages] = useState(1);
   const [pageFilter, setPageFilter] = useState("todas");
   const [orderState, setOrderState] = useState({
-    dataEncerramento: 'desc',
-    relevancia:'asc' 
+    field: "dataEncerramento",
+    direction: "desc",
   });
 
-  useEffect(()=>{
-    console.log(orderState)
-  },[orderState])
+  useEffect(() => {
+    console.log(orderState);
+  }, [orderState]);
+  useEffect(() => {
+    console.log(pageFilter);
+  }, [pageFilter]);
   const logUser = (userData) => setUser(userData);
   return (
     <UserContext.Provider
@@ -31,7 +34,7 @@ export const AppProvider = ({ children }) => {
         pageFilter,
         setPageFilter,
         orderState,
-        setOrderState
+        setOrderState,
       }}
     >
       {children}

@@ -7,12 +7,10 @@ import {
   faPager,
   faNewspaper,
   faBars,
-  faTimes
+  faTimes,
+  faChartLine,
 } from "@fortawesome/free-solid-svg-icons";
 import { UserContext } from "../../context/Context";
-
-
-
 
 import style from "./style.module.css";
 
@@ -25,7 +23,8 @@ const Layout = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const route = location.pathname.split("/").filter(Boolean)[0] || "dashboard";
+    const route =
+      location.pathname.split("/").filter(Boolean)[0] || "dashboard";
 
     setActiveRoute(route);
   }, [location.pathname]);
@@ -37,10 +36,14 @@ const Layout = () => {
 
   return (
     <>
-
       <main className={style.container}>
-        <div className={`${style.containerMenu} ${isMenuOpen ? style.open : style.closed}`}>
-          <button className={style.toggleBtn} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <div
+          className={`${style.containerMenu} ${isMenuOpen ? style.open : style.closed}`}
+        >
+          <button
+            className={style.toggleBtn}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
             <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
           </button>
           <aside className={style.menuSide}>
@@ -61,55 +64,75 @@ const Layout = () => {
                       <FontAwesomeIcon icon={faHome} className={style.icon} />
                       <span>Dashboard</span>
                     </Link>
-                    
                   </li>
 
-                   <li>
+                  <li>
                     <Link
                       to="editais"
-                      className={
-                        activeRoute === "editais" ? style.active : ""
-                      }
+                      className={activeRoute === "editais" ? style.active : ""}
                       onClick={() => setActiveRoute("editais")}
                     >
-                      <FontAwesomeIcon icon={faNewspaper} className={style.icon} />
+                      <FontAwesomeIcon
+                        icon={faNewspaper}
+                        className={style.icon}
+                      />
                       <span>Editais</span>
                     </Link>
-                    
+                  </li>
+                  <li>
+                    <Link
+                      to="resumo_analitico"
+                      className={activeRoute === "resumo_analitico" ? style.active : ""}
+                      onClick={() => setActiveRoute("resumo_analitico")}
+                    >
+                      <FontAwesomeIcon
+                        icon={faChartLine}
+                        className={style.icon}
+                      />
+                      <span>Resumo analítico</span>
+                    </Link>
                   </li>
                 </ul>
               </div>
-
             </div>
 
-            <div className={style.containerProfile}>
+            {/* <div className={style.containerProfile}>
               <div className={style.imgProfile}>
-                {/* <FontAwesomeIcon icon={faUser} color="#fff" size="1x" /> */}
+                <FontAwesomeIcon icon={faUser} color="#fff" size="1x" />
               </div>
               <div className={style.infoProfile}>
-                {/* <h3>{user.nome}</h3> */}
+                <h3>{user.nome}</h3>
                 <p>email@example.com</p>
               </div>
-            </div>
-            <div className={style.btnLogout}>
+            </div> */}
+            {/* <div className={style.btnLogout}>
               <button onClick={logout}>
-                {/* <FontAwesomeIcon icon={faSignOutAlt} className={style.icon} /> */}
+                <FontAwesomeIcon icon={faSignOutAlt} className={style.icon} />
               </button>
-            </div>
+            </div> */}
           </aside>
         </div>
 
-        <div className={`${style.containerContent} ${isMenuOpen ? style.contentOpen : style.contentClosed}`}>
+        <div
+          className={`${style.containerContent} ${isMenuOpen ? style.contentOpen : style.contentClosed}`}
+        >
           {/* <div className={style.headerContent}>
             <p>👋 Bem-vindo, {user.nome.split(" ")[0]}!</p>
             <p>👋 Bem-vindo!</p>
           </div> */}
           <div className={style.titlePage}>
-            <h1>
-              {activeRoute === "dashboard"
-                ? "Dashboard"
-                : activeRoute === 'editais' ? 'Editais' :''}
-            </h1>
+            <div>
+              {activeRoute === "dashboard" ? (
+                <div className={style.titleContent}>
+                  <h1>Dashboard</h1>
+                  <span>Visão geral das oportunidades monitoradas </span>
+                </div>
+              ) : activeRoute === "editais" ? (
+                <h1 className={style.routeTitle}>Editais</h1>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
           {/* <div className={style.containerSearch}>
             <div className={style.search}>

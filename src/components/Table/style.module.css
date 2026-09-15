@@ -16,6 +16,7 @@
 .table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
 .table thead {
@@ -24,14 +25,59 @@
 }
 
 .table th {
-    padding: 20px;
+    padding: 14px 10px;
     text-align: left;
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 0.72rem;
     color: var(--gray);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
     font-family: 'Geist', sans-serif;
+}
+
+.table th:nth-child(1),
+.table td:nth-child(1) {
+    width: 5%;
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+    width: 15%;
+}
+
+.table th:nth-child(3),
+.table td:nth-child(3) {
+    width: 9%;
+}
+
+.table th:nth-child(4),
+.table td:nth-child(4) {
+    width: 10%;
+}
+
+.table th:nth-child(5),
+.table td:nth-child(5) {
+    width: 24%;
+}
+
+.table th:nth-child(6),
+.table td:nth-child(6) {
+    width: 10%;
+}
+
+.table th:nth-child(7),
+.table td:nth-child(7) {
+    width: 13%;
+}
+
+.table th:nth-child(8),
+.table td:nth-child(8) {
+    width: 8%;
+}
+
+.table th:nth-child(9),
+.table td:nth-child(9) {
+    width: 6%;
 }
 
 .table tbody tr {
@@ -44,7 +90,7 @@
 }
 
 .table td {
-    padding: 16px;
+    padding: 12px 10px;
     font-size: 0.8rem;
     color: var(--text-color);
     font-family: 'Montserrat', sans-serif;
@@ -57,13 +103,30 @@
 .organName {
     display: block;
     /* color: var(--text-color); */
-    width: 200px;
+    width: 100%;
     overflow-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    font-size: 0.8em;
+    font-weight: 600;
+    /* text-transform:; */
 }
 
 .numeroEdital {
     /* color: var(--gray); */
     font-weight: 400;
+    max-width: 100px;
+     /* overflow-wrap: break-word; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
     /* cursor: pointer;
     transition: color 0.2s ease; */
 }
@@ -73,7 +136,7 @@
 } */
 
 .cellObject {
-    max-width: 350px;
+    max-width: none;
 }
 
 .cellObject span {
@@ -81,23 +144,24 @@
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
     color: var(--text-color);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
+    font-weight: 600;
 }
 
 .dateBox {
     display: flex;
     flex-direction: column;
     gap: 0.3em;
+    width: 100%;
 }
 
-.date {
+.dateProposta{
     font-weight: 600;
-    color: #1a1a1a;
-    font-size: 0.875rem;
 }
+
 
 .daysLeft {
     font-size: 0.75rem;
@@ -147,25 +211,62 @@
     align-items: center;
     justify-content: center;
 }
+.linkBtn{
+     display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    border-radius: 50px;
+    background-color: transparent;
+    color: #64748b;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.linkBtn:hover,
+.linkBtn:focus-visible {
+    background-color: #eef2ff;
+    color: #4f46e5;
+    outline: none;
+}
+.order {
+  white-space: nowrap;
+  vertical-align: middle;
+}
 
+.order > div {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 6px;
+}
 .paginationContainer {
     width: 100%;
     margin-top: auto;
-    padding: 12px;
-    background-color: var(--white);
+    min-height: 68px;
+    padding: 14px 20px;
+    background-color: #fcfcfd;
+    border-top: 1px solid var(--border-color);
     display: flex;
     justify-content: center;
-    /* margin-top: 1.5em; */
-    gap: 0.5em;
+    align-items: center;
 }
 
 .remainingMessage {
     flex: 1;
-    display: flex;
+    min-height: 42px;
+    padding: 12px 20px;
+    border-top: 1px solid #f0f0f0;
+    background-color: #ffffff;
     align-items: center;
     justify-content: center;
-    color: var(--gray);
-    font-size: 0.8rem;
+    color: #8a8f98;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2px;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -178,4 +279,32 @@
     color: #999;
     padding: 32px 16px !important;
     font-style: italic;
+}
+
+.loadingRow td {
+    height: 72px;
+}
+
+.loadingPlaceholder {
+    display: block;
+    width: 80%;
+    height: 14px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #eeeeee 25%, #f8f8f8 50%, #eeeeee 75%);
+    background-size: 200% 100%;
+    animation: loadingPulse 1.4s ease-in-out infinite;
+}
+
+.loadingRow td:nth-child(2) .loadingPlaceholder,
+.loadingRow td:nth-child(5) .loadingPlaceholder {
+    width: 90%;
+}
+
+@keyframes loadingPulse {
+    from {
+        background-position: 200% 0;
+    }
+    to {
+        background-position: -200% 0;
+    }
 }

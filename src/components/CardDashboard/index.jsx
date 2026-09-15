@@ -2,7 +2,7 @@ import style from './style.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
-const CardDashboard = ({icon, text, dados, subText, color1, color2})=>{
+const CardDashboard = ({icon, text, dados, subText, color1, color2, isLoading = false})=>{
     const cardStyle = {
         '--card-color-1': color1 || '#6366F1',
         '--card-color-2': color2 || '#4F46E5'
@@ -10,14 +10,24 @@ const CardDashboard = ({icon, text, dados, subText, color1, color2})=>{
 
 
     return(
-        <article className={style.cardDashboard} style={cardStyle}>
+        <article className={`${style.cardDashboard} ${isLoading ? style.loading : ""}`} style={cardStyle}>
             <div className={style.containerImg}>
-                <FontAwesomeIcon icon={icon} className={style.icon} />
+                {isLoading ? <span className={style.skeletonIcon} /> : <FontAwesomeIcon icon={icon} className={style.icon} />}
             </div>
             <div className={style.content}>
-                <p>{text}</p>
-                <p>{dados}</p>
-                {subText && <p>{subText}</p>}
+                {isLoading ? (
+                    <>
+                        <span className={`${style.skeletonLine} ${style.skeletonLabel}`} />
+                        <span className={`${style.skeletonLine} ${style.skeletonValue}`} />
+                        <span className={`${style.skeletonLine} ${style.skeletonSubtext}`} />
+                    </>
+                ) : (
+                    <>
+                        <p>{text}</p>
+                        <p>{dados}</p>
+                        {subText && <p>{subText}</p>}
+                    </>
+                )}
             </div>
         </article>
     )

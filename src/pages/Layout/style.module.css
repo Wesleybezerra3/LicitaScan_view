@@ -164,14 +164,48 @@
 
 } 
 .titlePage{
-    font-family: 'Geist', sans-serif;
-    color: var(--text-color);
+    position: relative;
     width: 100%;
-    margin-left: 10px;
+    /* margin: 4px 0 18px; */
+    padding: 0 10px 16px;
+    color: var(--text-color);
+    font-family: 'Geist', sans-serif;
+    border-bottom: 1px solid rgba(219, 219, 219, 0.8);
 }
-.titlePage h1{
-    font-size: 0.8rem;
-    font-weight: 500; 
+
+.titlePage::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 10px;
+    width: 42px;
+    height: 3px;
+    border-radius: 3px;
+    background-color: var(--pupple);
+}
+
+.titleContent {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.titlePage h1,
+.routeTitle {
+    margin: 0;
+    color: #172033;
+    font-size: clamp(1.35rem, 2vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.3px;
+}
+
+.titlePage span {
+    color: #7a8190;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    line-height: 1.4;
 }
 .containerSearch{
     /* margin-left: 30px; */

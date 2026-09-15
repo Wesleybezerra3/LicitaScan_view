@@ -1,0 +1,39 @@
+.orderButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-left: 4px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.orderButton:hover {
+  background-color: #eef2ff;
+  color: #4f46e5;
+}
+
+.orderButton:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+.orderButton.active {
+  color: #2563eb;
+}
+
+.orderButton svg {
+  transition: transform 0.2s ease;
+}
+
+.orderButton .ascending {
+  transform: rotate(180deg);
+}

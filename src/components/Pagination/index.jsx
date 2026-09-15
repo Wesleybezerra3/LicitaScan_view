@@ -1,11 +1,19 @@
 import { useContext, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
 import "./style.css";
 import { UserContext } from "../../context/Context";
 
 export default function Pagination({ limit = 10, total = 0 }) {
-  const totalPages = Math.max(1, Math.ceil(total / limit));
+  const hasPaginationData =
+    Number.isFinite(total) && Number.isFinite(limit) && limit > 0;
+
+  const totalPages = hasPaginationData
+    ? Math.max(1, Math.ceil(total / limit))
+    : Math.max(page || 1, 1);
   const { page, setPages } = useContext(UserContext);
   const currentPage = Math.min(Math.max(page || 1, 1), totalPages);
 

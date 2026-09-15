@@ -2,12 +2,15 @@ import { useState } from "react";
 import { UserContext } from "../../context/Context";
 import { useContext } from "react";
 import style from "./style.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const FiltersSection = ({ todas, novas, favoritas, vencendo }) => {
 
   
   const [tabState, setTabState] = useState("todas");
   const { setPageFilter } = useContext(UserContext);
+  const [filterVisible, setFilterVisible] = useState(false);
 
 
 
@@ -21,7 +24,7 @@ const FiltersSection = ({ todas, novas, favoritas, vencendo }) => {
 
   return (
     <div className={style.filtersContainer}>
-      <h3>Filtros</h3>
+      <h2>Navegação</h2>
       <div className={style.classesGroup}>
         <div className={style.classItem}>
           <input
@@ -47,7 +50,7 @@ const FiltersSection = ({ todas, novas, favoritas, vencendo }) => {
             id="novas"
             name="novas"
             className={style.filterButton}
-            onClick={() => setTabState("novas")}
+            onClick={() => handleTab("novas")}
             value={`Novas (${novas || 0})`}
           />
         </div>
@@ -76,34 +79,52 @@ const FiltersSection = ({ todas, novas, favoritas, vencendo }) => {
             name="vencendo"
             className={style.filterButton}
             onClick={() => handleTab("vencendo")}
-            value={`Vencendo (${vencendo || 0})`}
+            value={`Encerrando (${vencendo || 0})`}
           />
         </div>
       </div>
-      <div className={style.searchGroup}>
-        {/* <label htmlFor="search">Pesquisar</label> */}
-        <input
-          type="text"
-          id="search"
-          placeholder="Buscar órgão, edital ou objeto..."
-        />
-        {/* <button type="button">Filtrar</button> */}
-      </div>
-      <div className={style.filterGroup}>
-        <label htmlFor="estado">Estado</label>
-        <select id="estado">
-          <option value="">Selecione um estado</option>
-          <option value="estado1">Estado 1</option>
-          <option value="estado2">Estado 2</option>s
-        </select>
-      </div>
-      <div className={style.filterGroup}>
-        <label htmlFor="modalidade">Modalidade</label>
-        <select id="modalidade">
-          <option value="">Selecione uma modalidade</option>
-          <option value="modalidade1">Pregão Eletrônico</option>
-          <option value="modalidade2">Dispensa</option>
-        </select>
+      <div style={{marginBottom: filterVisible?'':'-20px'}}>
+        <div className={style.containerVisibleFilter}>
+          <h3>Filtros</h3>
+          <button
+            type="button"
+            className={style.toggleFilterButton}
+            aria-label={filterVisible ? "Ocultar filtros" : "Mostrar filtros"}
+            title={filterVisible ? "Ocultar filtros" : "Mostrar filtros"}
+            onClick={() => setFilterVisible((prev) => !prev)}
+          >
+            Ocultar Filtro
+            <FontAwesomeIcon icon={!filterVisible ? faEyeSlash: faEye}/>
+          </button>
+        </div>
+        <div className={style.containerFilter} style={{display:filterVisible? 'grid':'none' }}>
+            <div className={style.searchGroup}>
+        
+          {/* <label htmlFor="search">Pesquisar</label> */}
+          <input
+            type="text"
+            id="search"
+            placeholder="Buscar órgão, edital ou objeto..."
+          />
+          {/* <button type="button">Filtrar</button> */}
+        </div>
+          <div className={style.filterGroup}>
+            <label htmlFor="estado">Estado</label>
+            <select id="estado">
+              <option value="">Selecione um estado</option>
+              <option value="estado1">Estado 1</option>
+              <option value="estado2">Estado 2</option>s
+            </select>
+          </div>
+          <div className={style.filterGroup}>
+            <label htmlFor="modalidade">Modalidade</label>
+            <select id="modalidade">
+              <option value="">Selecione uma modalidade</option>
+              <option value="modalidade1">Pregão Eletrônico</option>
+              <option value="modalidade2">Dispensa</option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   );
